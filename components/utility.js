@@ -8,7 +8,7 @@ function playCycle() {
         game.print();
         console.log('');
         const userInput = prompt("Which way?: ");
-        game.handleDirection(userInput);
+        handleDirection(userInput);
         game.checkGameOver();
     }
 }
@@ -33,8 +33,8 @@ function checkWinLoss() {
     }
 }
 
-const handleDirection = (userInput) => {
-    switch (userInput){
+function handleDirection(input) {
+    switch (input){
         //Left Key
         case "l": {
             game.posHorizontal -= 1;
@@ -59,6 +59,6 @@ const handleDirection = (userInput) => {
             console.log("Try again, please type u,d,l,r (up, down, left, or right)")
         }
     }
-}
+};
 
 module.exports = {handleDirection, playCycle, setupGame, checkWinLoss};

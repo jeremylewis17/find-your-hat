@@ -33,9 +33,9 @@ const addFieldElement = (difficulty) => {
 
 class Field {
     constructor(fieldArray){
-        this._board = fieldArray;
-        this._posVertical = 0;
-        this._posHorizontal = 0;
+        this._board = fieldArray[0];
+        this._posVertical = fieldArray[1];
+        this._posHorizontal = fieldArray[2];
         this._gameOver = false;
         this._gameWon = false;
     }
@@ -81,38 +81,10 @@ class Field {
         }
     }
 
-    handleDirection(input) {
-        switch (input){
-            //Left Key
-            case "l": {
-                this.posHorizontal -= 1;
-                break;
-            }
-            //Up Key
-            case "u": {
-                this.posVertical -= 1;
-                break;
-            }
-            //Right Key
-            case "r": {
-                this.posHorizontal += 1;
-                break;
-            }
-            //Down Key
-            case "d": {
-                this.posVertical += 1;
-                break;
-            }
-            default: {
-                console.log("Try again, please type u,d,l,r (up, down, left, or right)")
-            }
-        }
-    };
-
     checkGameOver() {
-        if (this.posVertical < 0 || this.posVertical > this.board.length){
+        if (this.posVertical < 0 || this.posVertical >= this.board.length){
             this.gameOver = true;
-        } else if (this.posHorizontal < 0 || this.posHorizontal > this.board[this.posVertical].length){
+        } else if (this.posHorizontal < 0 || this.posHorizontal >= this.board[this.posVertical].length){
             this.gameOver = true;
         } else {
             const playerPosition = this.board[this.posVertical][this.posHorizontal];
@@ -150,9 +122,11 @@ class Field {
             }
             newField.push(newRow);
         }
-        newField[0][0] = pathCharacter;
+        const charPosX = Math.floor(Math.random() * width);
+        const charPosY = Math.floor(Math.random() * height);
+        newField[charPosY][charPosX] = pathCharacter;
         newField[hatHeight][hatWidth] = hat;
-        return newField;
+        return [newField, charPosY, charPosX];
     }
 }
 
