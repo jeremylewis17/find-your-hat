@@ -22,7 +22,12 @@ const addFieldElement = (difficulty) => {
                 return fieldCharacter;
             } else return hole;
         }
-    }
+        default:{
+            if (chosenElement > 0.2){
+                return fieldCharacter;
+            }   else return hole;
+        }
+}
 };
 
 
